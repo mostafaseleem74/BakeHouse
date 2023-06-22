@@ -5,11 +5,11 @@ pipeline {
         stage('build') {
             steps {
                 echo 'build'
-                withCredentials([usernamePassword(credentialsId: 'iti-sys-admin-sohag-docker-cred', usernameVariable: 'USERNAME_SOHAG', passwordVariable: 'PASSWORD_SOHAG')]) {
+                withCredentials([usernamePassword(credentialsId: 'docker', usernameVariable: 'USERNAME_SOHAG', passwordVariable: 'PASSWORD_SOHAG')]) {
                     sh '''
                         docker login -u ${USERNAME_SOHAG} -p ${PASSWORD_SOHAG}
-                        docker build -t kareemelkasaby/bakehouseitisohag:v${BUILD_NUMBER} .
-                        docker push kareemelkasaby/bakehouseitisohag:v${BUILD_NUMBER}
+                        docker build -t mostafaseleem/bakehouseitisohag:v${BUILD_NUMBER} .
+                        docker push mostafaseleem/bakehouseitisohag:v${BUILD_NUMBER}
                     '''
                 }
             }
@@ -18,7 +18,7 @@ pipeline {
             
             steps {
                 echo 'deploy'
-                withCredentials([file(credentialsId: 'iti-sys-admin-sohag-kubeconfig-cred', variable: 'KUBECONFIG_SOHAG')]) {
+                withCredentials([file(credentialsId: 'kube', variable: 'KUBECONFIG_SOHAG')]) {
                     sh '''
                         mv Deployment/deploy.yaml Deployment/tmp.yaml
                         cat Deployment/tmp.yaml | envsubst > Deployment/deploy.yaml
