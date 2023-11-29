@@ -66,4 +66,4 @@ jobs:
         with:
           app-name: 'APP-OCRSolution'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_3A04B5CC22484670BED1ADE742FEF37B }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_ED4263E46D27497AA9159427D7CF46FF }}
